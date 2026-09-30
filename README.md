@@ -31,25 +31,21 @@ docker-compose up --build
 
 A API estará disponível em `http://localhost:5000`
 
-### Sem Docker
+### Sem Docker (Apenas o Mongo no Docker)
 
 1. Certifique-se de que MongoDB está rodando em sua máquina
 
-2. Crie um arquivo `.env` na raiz do projeto:
-
 ```
-DB_HOST=localhost
-DB_NAME=football_db
-DB_PORT=27017
+docker run -p 27017:27017 --name mongo mongo
 ```
 
-3. Instale as dependências:
+2. Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Inicie a aplicação:
+3. Inicie a aplicação:
 
 ```bash
 python app.py
@@ -79,67 +75,9 @@ Content-Type: application/json
 }
 ```
 
-### Atualizar um time
-```
-PUT /times/<id>
-Content-Type: application/json
-
-{
-  "nome": "Flamengo",
-  "estadio": "Estádio Nilton Santos",
-  "cidade": "Rio de Janeiro"
-}
-```
-
-### Deletar um time
-```
-DELETE /times/<id>
-```
-
 ### Verificar saúde da API
 ```
 GET /health
-```
-
-## Exemplos de Uso
-
-### Com curl
-
-Criar um time:
-```bash
-curl -X POST http://localhost:5000/times \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nome": "São Paulo FC",
-    "estadio": "Morumbi",
-    "cidade": "São Paulo"
-  }'
-```
-
-Listar todos os times:
-```bash
-curl http://localhost:5000/times
-```
-
-Obter um time específico:
-```bash
-curl http://localhost:5000/times/1
-```
-
-Atualizar um time:
-```bash
-curl -X PUT http://localhost:5000/times/1 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "nome": "São Paulo FC",
-    "estadio": "Estádio do Morumbi",
-    "cidade": "São Paulo"
-  }'
-```
-
-Deletar um time:
-```bash
-curl -X DELETE http://localhost:5000/times/1
 ```
 
 ## Estrutura do Projeto
