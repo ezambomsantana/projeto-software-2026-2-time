@@ -64,6 +64,7 @@ services:
       DB_HOST: postgres
       DB_USER: usuario
       DB_PASSWORD: senha
+      TIME_APP_URL: http://time:5000
     depends_on:
       postgres:
         condition: service_healthy
