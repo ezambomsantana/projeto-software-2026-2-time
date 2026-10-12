@@ -1,18 +1,18 @@
 # API de Cadastro de Times de Futebol
 
-API simples desenvolvida com Flask e MongoDB para gerenciar times de futebol.
-
-## Requisitos
-
-- Docker e Docker Compose (recomendado)
-- Ou Python 3.11+ e MongoDB instalados
 
 ## Como Executar
 
-1. Certifique-se de que MongoDB está rodando em sua máquina
+1. Crie a rede Docker (se não foi criada ainda)
 
 ```
-docker run -p 27017:27017 --name mongo mongo
+docker network create -d bridge rede
+```
+
+2. Certifique-se de que MongoDB está rodando em sua máquina
+
+```
+docker run -p 27017:27017 --network=rede --name mongo mongo
 ```
 
 2. Instale as dependências:
@@ -21,11 +21,18 @@ docker run -p 27017:27017 --name mongo mongo
 pip install -r requirements.txt
 ```
 
-3. Inicie a aplicação:
+3. Mude os parâmetros do GitHub Action
 
-```bash
-python app.py
+no arquivo /.github/workflows/deploy.yml existem 3 valores,
+mude os nomes de usuário para o seu usuário do DockerHub
+
 ```
+env:
+  DOCKER_IMAGE: ezambomsantana/time-ci
+  CONTAINER_NAME: time
+  DOCKER_USER: ezambomsantana
+```
+
 
 ## Endpoints
 
@@ -45,7 +52,7 @@ POST /times
 Content-Type: application/json
 
 {
-  "nome": "Flamengo",
+  "nome": "sFlamengo",
   "estadio": "Maracanã",
   "cidade": "Rio de Janeiro"
 }
