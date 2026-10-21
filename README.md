@@ -33,32 +33,3 @@ env:
   DOCKER_USER: ezambomsantana
 ```
 
-
-## Endpoints
-
-### Listar todos os times
-```
-GET /times
-```
-
-### Obter um time específico
-```
-GET /times/<id>
-```
-
-### Criar um novo time
-```
-POST /times
-Content-Type: application/json
-
-{
-  "nome": "sFlamengo",
-  "estadio": "Maracanã",
-  "cidade": "Rio de Janeiro"
-}
-```
-
-### Verificar saúde da API
-```
-GET /health
-```
