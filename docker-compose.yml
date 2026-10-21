@@ -80,7 +80,7 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - rede
+      - app-network
     command: redis-server --appendonly yes
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -92,6 +92,7 @@ services:
 volumes:
   postgres_data:
   mongo_data:
+  redis_data:
 
 networks:
   app-network:
