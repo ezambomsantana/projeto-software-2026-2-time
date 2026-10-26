@@ -47,11 +47,35 @@ services:
       DB_HOST: mongo
       DB_NAME: ${DB_NAME:-futebol_db}
       DB_PORT: 27017
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     depends_on:
       mongo:
         condition: service_healthy
+      redis:
+        condition: service_healthy
     networks:
       - app-network
+
+  time-worker:
+    build:
+      context: ./projeto-software-2026-2-time
+      dockerfile: Dockerfile
+    container_name: time-worker
+    environment:
+      DB_HOST: mongo
+      DB_NAME: ${DB_NAME:-futebol_db}
+      DB_PORT: 27017
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - app-network
+    command: python worker.py
 
   partida:
     build:

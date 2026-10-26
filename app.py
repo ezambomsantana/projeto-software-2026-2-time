@@ -30,7 +30,10 @@ def time_to_dict(time_doc):
         'id': str(time_doc['_id']),
         'nome': time_doc['nome'],
         'estadio': time_doc['estadio'],
-        'cidade': time_doc['cidade']
+        'cidade': time_doc['cidade'],
+        'pontos': time_doc.get('pontos', 0),
+        'gols_feitos': time_doc.get('gols_feitos', 0),
+        'gols_levados': time_doc.get('gols_levados', 0)
     }
 
 # Rotas da API
@@ -65,7 +68,10 @@ def criar_time():
     novo_time = {
         'nome': dados['nome'],
         'estadio': dados['estadio'],
-        'cidade': dados['cidade']
+        'cidade': dados['cidade'],
+        'pontos': 0,
+        'gols_feitos': 0,
+        'gols_levados': 0
     }
 
     resultado = times_collection.insert_one(novo_time)
@@ -74,7 +80,10 @@ def criar_time():
         'id': str(resultado.inserted_id),
         'nome': novo_time['nome'],
         'estadio': novo_time['estadio'],
-        'cidade': novo_time['cidade']
+        'cidade': novo_time['cidade'],
+        'pontos': novo_time['pontos'],
+        'gols_feitos': novo_time['gols_feitos'],
+        'gols_levados': novo_time['gols_levados']
     }), 201
     
 @app.route('/health', methods=['GET'])
